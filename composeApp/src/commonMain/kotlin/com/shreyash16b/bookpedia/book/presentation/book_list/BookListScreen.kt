@@ -9,9 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -39,10 +37,8 @@ import bookpedia.composeapp.generated.resources.favourites
 import bookpedia.composeapp.generated.resources.no_favourite_books
 import bookpedia.composeapp.generated.resources.no_search_result
 import bookpedia.composeapp.generated.resources.search_results
-import bookpedia.composeapp.generated.resources.test
 import com.shreyash16b.bookpedia.book.domain.Book
 import com.shreyash16b.bookpedia.book.presentation.book_list.components.BookList
-import com.shreyash16b.bookpedia.book.presentation.book_list.components.BookListItem
 import com.shreyash16b.bookpedia.book.presentation.book_list.components.BookSearchBar
 import com.shreyash16b.bookpedia.core.presentation.DarkBlue
 import com.shreyash16b.bookpedia.core.presentation.DesertWhite
@@ -87,8 +83,8 @@ private fun BookListScreen(
 
     val favouritesListState = rememberLazyListState()
 
-    LaunchedEffect(state.selectedTab){
-        pagerState.animateScrollToPage(state.selectedTab) //Change the tab when selected
+    LaunchedEffect(state.selectedTabIndex){
+        pagerState.animateScrollToPage(state.selectedTabIndex) //Change the tab when selected
     }
 
     LaunchedEffect(pagerState.currentPage){
@@ -122,15 +118,15 @@ private fun BookListScreen(
                 .fillMaxWidth(),
             color = DesertWhite,
             shape = RoundedCornerShape(
-                topStart = 32.dp,
-                topEnd = 32.dp
+                topStart = 24.dp,
+                topEnd = 24.dp
             )
         ) {
             Column (
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
                 TabRow(
-                    state.selectedTab,
+                    state.selectedTabIndex,
                     modifier = Modifier
                         .padding(12.dp)
                         .widthIn(max = 700.dp),
@@ -139,12 +135,12 @@ private fun BookListScreen(
                     indicator = { tabPositions ->
                         TabRowDefaults.SecondaryIndicator(
                             color = SandYellow,
-                            modifier = Modifier.tabIndicatorOffset(tabPositions[state.selectedTab])
+                            modifier = Modifier.tabIndicatorOffset(tabPositions[state.selectedTabIndex])
                         )
                     }
                 ){
                     Tab(
-                        selected = state.selectedTab == 0,
+                        selected = state.selectedTabIndex == 0,
                         onClick = {
                             onAction(BookListAction.onTabSelected(0))
                         },
@@ -161,7 +157,7 @@ private fun BookListScreen(
                     }
 
                     Tab(
-                        selected = state.selectedTab == 1,
+                        selected = state.selectedTabIndex == 1,
                         onClick = {
                             onAction(BookListAction.onTabSelected(1))
                         },

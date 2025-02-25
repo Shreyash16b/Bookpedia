@@ -16,14 +16,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -48,10 +46,10 @@ import kotlin.math.round
 fun BookListItem(
     book: Book,
     onClick : () -> Unit,
-    modifier: Modifier
+    modifier: Modifier = Modifier
 ){
     Surface(
-        shape = RoundedCornerShape(25.dp),
+        shape = RoundedCornerShape(12.dp),
         modifier = modifier
             .clickable(onClick = onClick),
         color = LightBlue.copy(alpha = 0.25f)
@@ -75,10 +73,9 @@ fun BookListItem(
                 val painter = rememberAsyncImagePainter(
                     model = book.imageUrl,
                     onSuccess = {
-                        if(it.painter.intrinsicSize.width > 1 && it.painter.intrinsicSize.height >1){
+                        imageLoadResult = if(it.painter.intrinsicSize.width > 1 && it.painter.intrinsicSize.height > 1){
                             Result.success(it.painter)
-                        }
-                        else{
+                        } else{
                             Result.failure(Exception("Invalid Image Exception"))
                         }
                     },
@@ -135,9 +132,7 @@ fun BookListItem(
                     ){
                         Text(
                             text = "${round(rating*10)/10.0}",
-                            maxLines = 1,
-                            style = MaterialTheme.typography.bodyMedium,
-                            overflow = TextOverflow.Ellipsis
+                            style = MaterialTheme.typography.bodyMedium
                         )
 
                         Icon(
@@ -149,7 +144,7 @@ fun BookListItem(
                 }
             }
             Icon(
-                imageVector = Icons. AutoMirrored. Filled. KeyboardArrowRight,
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 contentDescription = null,
                 modifier = Modifier
                     .size(36.dp)
