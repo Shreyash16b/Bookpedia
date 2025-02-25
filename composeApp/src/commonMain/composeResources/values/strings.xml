@@ -3,5 +3,9 @@
     <string name="search_hint"> Search... </string>
     <string name="close_search"> Clear Search </string>
     <string name="test"> Clear Search </string>
+    <string name="search_results"> Search Result</string>
+    <string name="favourites"> Favourites </string>
+    <string name="no_search_result"> Oops! There are no books for your query </string>
+    <string name="no_favourite_books"> No favourite books saved </string>
 
 </resources>
