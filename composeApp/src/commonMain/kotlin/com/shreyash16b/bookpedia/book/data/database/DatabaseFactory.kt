@@ -1,4 +1,7 @@
 package com.shreyash16b.bookpedia.book.data.database
 
-class DatabaseFactory {
+import androidx.room.RoomDatabase
+
+expect class DatabaseFactory {
+    fun create() : RoomDatabase.Builder<FavouriteBookDatabase>
 }

@@ -119,11 +119,11 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "com.shreyash16b.bookpedia.MainKt"
+        mainClass = "com.plcoding.bookpedia.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.shreyash16b.bookpedia"
+            packageName = "com.plcoding.bookpedia"
             packageVersion = "1.0.0"
         }
     }

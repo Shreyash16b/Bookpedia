@@ -1,3 +1,19 @@
 package com.shreyash16b.bookpedia.book.data.database
 
-data class BookEntity()
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class BookEntity(
+    @PrimaryKey(autoGenerate = false) val id: String,
+    val title: String,
+    val description: String?,
+    val imageUrl: String,
+    val languages: List<String>,
+    val authors: List<String>,
+    val firstPublishedYear: String?,
+    val ratingsAverage: Double?,
+    val ratingsCount: Int?,
+    val numPagesMedian: Int?,
+    val numEditions: Int = 0
+)
